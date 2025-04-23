@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dalton's Office Escape Plan</title>
+  <title>TCT Prison Timer</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
     label, input { display: block; margin-bottom: 10px; }
@@ -12,16 +12,16 @@
   </style>
 </head>
 <body>
-  <h2>Dalton's Office Escape Plan</h2>
+  <h2>When can Dalton leave? &#128557;</h2>
 
   <label>Today's Sentence:</label>
   <input type="number" id="hours" placeholder="Hours" min="0" required> 
   <input type="number" id="minutes" placeholder="Minutes" min="0" max="59">
 
-  <label>Clock in:</label>
+  <label>Inmate Arrival:</label>
   <input type="time" id="t1" value="08:00">
 
-  <label>Lunch out:</label>
+  <label>Lunch:</label>
   <input type="time" id="t2" value="12:00">
 
   <label>Back from lunch:</label>
@@ -71,7 +71,7 @@
       const T4 = T3 + remainingWork;
       const leaveTime = formatTime(T4);
 
-      alert(`You may leave at: ${leaveTime}`);
+      alert(`Cell block opens at: ${leaveTime}`);
     }
   </script>
 </body>
