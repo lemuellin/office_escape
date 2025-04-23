@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leave Time Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
+    label, input { display: block; margin-bottom: 10px; }
+    input[type="time"], input[type="number"] { width: 100%; padding: 5px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Leave Time Calculator</h2>
+
+  <label>Total hours to work today:</label>
+  <input type="number" id="hours" placeholder="Hours" min="0"> 
+  <input type="number" id="minutes" placeholder="Minutes" min="0" max="59">
+
+  <label>Clock in (T1):</label>
+  <input type="time" id="t1">
+
+  <label>Lunch out (T2):</label>
+  <input type="time" id="t2">
+
+  <label>Back from lunch (T3):</label>
+  <input type="time" id="t3">
+
+  <button onclick="calculateLeaveTime()">Calculate</button>
+
+  <script>
+    function parseTime(str) {
+      const [h, m] = str.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function formatTime(minutes) {
+      let h = Math.floor(minutes / 60);
+      let m = minutes % 60;
+      if (h >= 24) h -= 24;
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+
+    function calculateLeaveTime() {
+      const totalHours = parseInt(document.getElementById("hours").value) || 0;
+      const totalMinutes = parseInt(document.getElementById("minutes").value) || 0;
+      const T1 = parseTime(document.getElementById("t1").value);
+      const T2 = parseTime(document.getElementById("t2").value);
+      const T3 = parseTime(document.getElementById("t3").value);
+
+      const workBeforeLunch = T2 - T1;
+      const totalRequired = totalHours * 60 + totalMinutes;
+      const remainingWork = totalRequired - workBeforeLunch;
+
+      const T4 = T3 + remainingWork;
+      const leaveTime = formatTime(T4);
+
+      alert(`You may leave at: ${leaveTime}`);
+    }
+  </script>
+</body>
+</html>
